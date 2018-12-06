@@ -66,49 +66,41 @@ document.querySelector("#answer4").innerHTML = woodnames
 
 
 /* Question 5 - Which items have 8 or more materials, display NAME, # of items, and what theyre made of */
+// filter to get 8 or more
+// hold data with string
+// forEach to display
 
-
-let displayName = "" 
-let numOfMaterials = 0
-let madeOf = ""
-
-items.forEach(function(item){
+let allItems = items.filter(function(item) {
 	if(item.materials.length >= 8) {
-		displayName = item.title 
-		numOfMaterials = item.materials.length
-		madeOf = item.materials
+		return true
+	} else {
+		return true
 	}
 })
 
-document.querySelector("#answer5").innerHTML = displayName + " has " + numOfMaterials + " materials:" + madeOf
+let answer = ""
+
+allItems.forEach(function(item){
+	if(item.materials.length >= 8) {
+		answer += `${item.title} has ${item.materials.length} materials\n${item.materials}\n`
+	}
+})
+
+document.querySelector("#answer5").innerHTML = answer
 
 
 /* Question 6 - How many items were made by their sellers?  */
 
-let numOfSellers = item.reduce(function (n, seller) {
-    return n + (seller.who_made == "i_did");
-}, 0);
 
-console.log(numOfSellers);
+let sellers = items.filter(function(item){
+	if (item.who_made === "i_did"){
+		return true
+	} else {
+		return false
+	}
+})
 
-
-
-
-// let numOfSellers = 0;
-// for(let i=0;i<items.length;i++){
-//     if(items.who_made === "i_did")
-//        numOfSellers++;
-// }
-
-// let numberOfSellers = 0
-
-// let sellers = items.filter(function(item){
-// 	if (items.who_made == "i_did"){
-// 		console.log(numberOfSellers ++)
-// 	}
-// })
-
-document.querySelector("#answer6").innerHTML = numOfSellers
+document.querySelector("#answer6").innerHTML = `${sellers.length} were made by their sellers`
 
 
 
